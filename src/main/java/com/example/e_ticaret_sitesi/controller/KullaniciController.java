@@ -16,19 +16,18 @@ public class KullaniciController {
     private final KullaniciService kullaniciService;
     private final PasswordEncoder passwordEncoder;
 
-    // Constructor injection for dependencies
     public KullaniciController(KullaniciService kullaniciService, PasswordEncoder passwordEncoder) {
         this.kullaniciService = kullaniciService;
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Get all users
     @GetMapping
     public List<Kullanici> getAllUsers() {
         return kullaniciService.getTumKullanicilar();
     }
 
-    // Register a new user
+
+
     @PostMapping
     public String kayitUser(@ModelAttribute Kullanici kullanici) {
         String encodedPassword = passwordEncoder.encode(kullanici.getSifre());
@@ -40,7 +39,6 @@ public class KullaniciController {
     }
 
 
-    // Delete a user
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         kullaniciService.kullaniciSil(id);

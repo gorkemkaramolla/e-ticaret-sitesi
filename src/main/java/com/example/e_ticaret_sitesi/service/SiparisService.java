@@ -11,16 +11,20 @@ import java.util.*;
 @Service
 public class SiparisService {
 
-    @Autowired
-    private SiparisRepository siparisRepository;
 
-    @Autowired
-    private SepetRepository sepetRepository;
+    private final SiparisRepository siparisRepository;
 
-    @Autowired
-    private KullaniciRepository kullaniciRepository;
 
-    // ✅ Sipariş oluştur
+    private final SepetRepository sepetRepository;
+
+    private final KullaniciRepository kullaniciRepository;
+
+    public SiparisService(SiparisRepository siparisRepository, SepetRepository sepetRepository, KullaniciRepository kullaniciRepository) {
+        this.siparisRepository = siparisRepository;
+        this.sepetRepository = sepetRepository;
+        this.kullaniciRepository = kullaniciRepository;
+    }
+
     public Siparis siparisOlustur(Long kullaniciId) {
         Kullanici kullanici = kullaniciRepository.findById(kullaniciId)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
@@ -28,8 +32,11 @@ public class SiparisService {
         Sepet sepet = sepetRepository.findByKullanici(kullanici)
                 .orElseThrow(() -> new RuntimeException("Sepet bulunamadı"));
 
-        List<Urun> urunler = sepet.getUrunler();
-        if (urunler == null || urunler.isEmpty()) {
+        List<Urun> urunler = sepet.getUrunSepetList().stream()
+                .map(UrunSepet::getUrun)
+                .toList();
+
+        if (urunler.isEmpty()) {
             throw new RuntimeException("Sepet boş, sipariş oluşturulamaz.");
         }
 
@@ -39,11 +46,12 @@ public class SiparisService {
         siparis.setTarih(LocalDateTime.now());
 
         // Sepeti boşalt
-        sepet.setUrunler(new ArrayList<>());
+        sepet.getUrunSepetList().clear();
         sepetRepository.save(sepet);
 
         return siparisRepository.save(siparis);
     }
+
 
     // ✅ Tüm siparişleri getir
     public List<Siparis> siparisleriListele(Long kullaniciId) {

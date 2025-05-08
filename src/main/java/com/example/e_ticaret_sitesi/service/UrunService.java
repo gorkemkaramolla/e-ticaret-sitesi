@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UrunService {
@@ -20,18 +21,18 @@ public class UrunService {
         this.urunRepository = urunRepository;
         this.kategoriRepository = kategoriRepository;
     }
-
-    // ✅ Tüm ürünleri getir
+    public  Optional<Urun> findById(Long id)
+    {
+        return  urunRepository.findById(id);
+    }
     public List<Urun> tumUrunleriGetir() {
         return urunRepository.findAll();
     }
 
-    // ✅ Ürün adına göre arama yap
     public List<Urun> adaGoreAra(String ad) {
         return urunRepository.findByAdContainingIgnoreCase(ad);
     }
 
-    // ✅ Kategoriye göre filtrele
     public List<Urun> kategoriyeGoreFiltrele(Long kategoriId) {
         Kategori kategori = kategoriRepository.findById(kategoriId)
                 .orElseThrow(() -> new RuntimeException("Kategori bulunamadı"));

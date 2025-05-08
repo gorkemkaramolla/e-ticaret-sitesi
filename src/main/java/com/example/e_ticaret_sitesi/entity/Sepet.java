@@ -10,22 +10,17 @@ import java.util.List;
 @Getter
 @Setter
 public class Sepet {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "kullanici_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "kullanici_id", nullable = false)
     private Kullanici kullanici;
 
-    @ManyToMany
-    @JoinTable(
-            name = "sepet_urun",
-            joinColumns = @JoinColumn(name = "sepet_id"),
-            inverseJoinColumns = @JoinColumn(name = "urun_id")
-    )
-    private List<Urun> urunler;
+    @OneToMany(mappedBy = "sepet", cascade = CascadeType.PERSIST)
+    private List<UrunSepet> urunSepetList;
 
-
+    @Column(nullable = false)
+    private Boolean aktif = true;
 }

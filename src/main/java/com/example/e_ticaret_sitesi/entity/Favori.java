@@ -1,8 +1,12 @@
 package com.example.e_ticaret_sitesi.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
 
 @Entity
+@Data
+@Table(name = "favoriler")
 public class Favori {
 
     @Id
@@ -18,29 +22,4 @@ public class Favori {
     @ManyToOne
     @JoinColumn(name = "urun_id")
     private Urun urun;
-
-    // Getter ve Setter
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Kullanici getKullanici() {
-        return kullanici;
-    }
-
-    public void setKullanici(Kullanici kullanici) {
-        this.kullanici = kullanici;
-    }
-
-    public Urun getUrun() {
-        return urun;
-    }
-
-    public void setUrun(Urun urun) {
-        this.urun = urun;
-    }
 }

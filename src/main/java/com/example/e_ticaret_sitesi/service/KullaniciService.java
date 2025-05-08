@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -37,6 +38,10 @@ public class KullaniciService {
 
     public List<Kullanici> getTumKullanicilar() {
         return kullaniciRepository.findAll();
+    }
+
+    public Optional<Kullanici> getKullaniciByEposta(String eposta) {
+        return kullaniciRepository.findByEposta(eposta);
     }
 
     public void kullaniciSil(Long id) {

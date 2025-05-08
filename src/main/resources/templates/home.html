@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Ticaret Sitesi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div layout:fragment="content">
+
+    <header>
+        <div class="logo">
+            <h1>E-Ticaret</h1>
+        </div>
+        <div id="category-menu" class="category-menu">
+            <button class="category-item"><i class="fas fa-mobile-alt"></i> Telefon</button>
+            <button class="category-item"><i class="fas fa-tablet-alt"></i> Tablet</button>
+            <button class="category-item"><i class="fas fa-laptop"></i> Laptop</button>
+            <button class="category-item"><i class="fas fa-headphones-alt"></i> Kulaklık</button>
+        </div>
+    </header>
+
+    <header>
+        <div class="deneme">
+            <nav class="category-bar">
+                <a href="#">Telefon</a>
+                <a href="#">Masaüstü Bilgisayar</a>
+                <a href="#">Dizüstü Bilgisayar</a>
+                <a href="#">Tablet</a>
+                <a href="#">Kulaklık</a>
+                <a href="#">Televizyon</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h2>Şimdi Alışverişe Başla!</h2>
+            <p>En popüler ürünleri keşfet ve fırsatları kaçırma.</p>
+            <button class="btn-main">Alışverişe Başla</button>
+        </div>
+    </section>
+
+    <section class="product-list urunler">
+        <div class="product-card" th:each="urun : ${urunler}">
+            <div class="product-image-container">
+                <img th:src="${urun.resimUrl}"
+                     th:alt="${urun.ad != null ? urun.ad : 'Ürün Resmi'}"
+                     class="product-image-fit"/>
+            </div>
+            <h3 th:text="${urun.ad}">Ürün Adı</h3>
+            <p class="product-description" th:text="${urun.aciklama}">Açıklama</p>
+            <p class="fiyat" th:text="'₺' + ${urun.fiyat}">₺0</p>
+            <p><small th:text="${urun.kategori != null && urun.kategori.ad != null ? urun.kategori.ad : 'Kategori Yok'}">Kategori</small></p>
+
+            <!-- Form to add the product to the cart -->
+            <form action="/sepet/ekle" method="post" class="d-inline-block">
+                <input type="hidden" name="productId" th:value="${urun.id}"> <!-- Dynamically set the product ID -->
+                <input type="hidden" name="quantity" value="1"> <!-- Default quantity is 1 -->
+                <button type="submit" class="btn">Sepete Ekle</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 E-Ticaret - Tüm Hakları Saklıdır</p>
+    </footer>
+</div>
+</body>
+</html>

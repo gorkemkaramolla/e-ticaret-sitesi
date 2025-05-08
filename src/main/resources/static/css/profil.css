@@ -1,0 +1,109 @@
+/* profil-custom.css */
+
+body {
+    background-color: #f8f9fa; /* Light gray background for the page */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean sans-serif font */
+}
+
+.container {
+    padding-top: 20px; /* Add some padding at the top of the container */
+    padding-bottom: 40px; /* Ensure space at the bottom */
+}
+
+.card {
+    border: none; /* Remove default border if shadow is preferred, or use a light one */
+    /* border: 1px solid #e0e0e0; */ /* Optional light border */
+    border-radius: 0.65rem; /* Softer, more modern corners */
+    overflow: hidden; /* Ensures header rounding is clean with background */
+}
+
+.card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(0,0,0,.075); /* Subtle border for header */
+}
+
+.card-header h4,
+.card-header h5 {
+    font-weight: 500; /* Medium weight for header titles */
+    margin-bottom: 0; /* Remove default margin from headings */
+}
+
+/* Style for optional edit buttons in card headers */
+.card-header .btn-light {
+    color: #495057;
+    border-color: #ced4da;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+}
+.card-header .btn-light:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+.card-header .btn-light i {
+    margin-right: 4px;
+}
+
+.card-body {
+    padding: 1.5rem; /* More padding in card body for better spacing */
+}
+
+.card-body .row {
+    margin-bottom: 0.9rem; /* Consistent spacing between rows of details */
+}
+.card-body .row:last-child {
+    margin-bottom: 0; /* No margin for the last row in a section */
+}
+
+.card-body strong {
+    color: #343a40; /* Darker gray for labels, good contrast */
+    font-weight: 600; /* Slightly bolder labels */
+    display: block; /* Makes sure it aligns well if text wraps */
+}
+
+@media (min-width: 576px) { /* sm breakpoint and up */
+    .card-body strong {
+        display: inline; /* Default display for wider screens */
+    }
+}
+
+.card-body span,
+.card-body .text-muted {
+    color: #495057; /* Standard text color for values */
+}
+
+.badge.bg-secondary {
+    font-size: 0.875em; /* Slightly larger badge text */
+    padding: 0.45em 0.75em;
+    font-weight: 500;
+}
+
+.text-muted.fst-italic { /* For 'no address' or 'no roles' messages */
+    color: #6c757d !important;
+    font-style: italic !important;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Settings Card Specifics */
+.card-body.text-center .btn {
+    padding: 0.75rem 1.5rem; /* Comfortable padding for larger button */
+    font-size: 1.05rem; /* Slightly larger font for button text */
+    min-width: 220px; /* Ensure button has a good width */
+}
+
+.btn-warning {
+    color: #212529; /* Darker text for better contrast on yellow */
+    background-color: #ffc107;
+    border-color: #ffc107;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.btn-warning:hover {
+    color: #000;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn i { /* Icon styling within buttons */
+    margin-right: 8px;
+}

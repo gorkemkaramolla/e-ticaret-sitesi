@@ -1,11 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: content">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Alışveriş Sepetim</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
 <body>
-<h2>Sepetiniz</h2>
-<div th:each="urun : ${sepetUrunleri}">
-    <p th:text="${urun.ad} + ' - ' + ${urun.fiyat} + '₺'">Ürün</p>
+<div layout:fragment="content" class="container mt-5">
+    <h1>Alışveriş Sepetim</h1>
+
+    <div th:if="${#lists.isEmpty(cartItems)}">
+        <p>Sepetiniz şu anda boş.</p>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(cartItems)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Ürün</th>
+                <th>Fiyat</th>
+                <th>Miktar</th>
+                <th>Ara Toplam</th>
+                <th>İşlem</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${cartItems}">
+                <td th:text="${item.urun.ad}">Ürün Adı</td>
+                <td th:text="${#numbers.formatDecimal(item.urun.fiyat, 1, 'POINT', 2, 'COMMA') + ' TL'}">Fiyat</td>
+                <td th:text="${item.quantity}">Miktar</td>
+                <td th:text="${#numbers.formatDecimal(item.subtotal, 1, 'POINT', 2, 'COMMA') + ' TL'}">Ara Toplam</td>
+                <td>
+                    <form th:action="@{/sepet/sil}" method="post">
+                        <input type="hidden" name="productId" th:value="${item.urun.id}" />
+                        <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-right">
+            <h3>Toplam: <span th:text="${#numbers.formatDecimal(total, 1, 'POINT', 2, 'COMMA') + ' TL'}">Toplam Fiyat</span></h3>
+            <a th:href="@{/odeme}" class="btn btn-success">Ödemeye Geç</a>
+        </div>
+    </div>
+
+    <a th:href="@{/urunler}" class="btn btn-info mt-3">Alışverişe Devam Et</a>
 </div>
-<p th:text="'Toplam: ' + ${toplamFiyat} + '₺'">Toplam</p>
-<a href="/siparis/ver">Siparişi Tamamla</a>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

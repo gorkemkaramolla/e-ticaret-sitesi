@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Profil</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
+<div class="container mt-5 mb-5" layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
 
+            <div class="card profile-card mb-4">
+                <div class="profile-header">
+                    <h3>Kullanıcı Profili</h3>
+                </div>
+                <div class="card-body p-4">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Kullanıcı Adı:</strong>
+                            <span th:text="${kullanici.kullaniciAdi ?: '-'}">kullanici_adi_ornek</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>E-posta:</strong>
+                            <span th:text="${kullanici.eposta ?: '-'}">eposta@ornek.com</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Roller:</strong>
+                            <div>
+                                <span th:if="${kullanici.roller != null and !#lists.isEmpty(kullanici.roller)}" th:each="rol : ${kullanici.roller}" class="badge bg-secondary me-1" th:text="${rol}">Rol</span>
+                                <span th:if="${kullanici.roller == null or #lists.isEmpty(kullanici.roller)}" class="text-muted fst-italic">Rol atanmamış</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Durum:</strong>
+                            <span th:text="${kullanici.aktif ? 'Aktif' : 'Pasif'}" th:classappend="${kullanici.aktif ? 'text-success' : 'text-danger'}" style="font-weight: bold;">Aktif</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card password-card">
+                <div class="card-header bg-light text-dark text-center">
+                    <h4>Şifre Değiştir</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post"> <div class="mb-3">
+                        <label for="eskiSifre" class="form-label">Eski Şifre</label>
+                        <input type="password" class="form-control" id="eskiSifre" name="eskiSifre" required>
+                    </div>
+                        <div class="mb-3">
+                            <label for="yeniSifre" class="form-label">Yeni Şifre</label>
+                            <input type="password" class="form-control" id="yeniSifre" name="yeniSifre" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="yeniSifreTekrar" class="form-label">Yeni Şifre (Tekrar)</label>
+                            <input type="password" class="form-control" id="yeniSifreTekrar" name="yeniSifreTekrar" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-custom-primary btn-lg">Şifreyi Güncelle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a th:href="@{/}" class="btn btn-outline-secondary">Ana Sayfaya Dön</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

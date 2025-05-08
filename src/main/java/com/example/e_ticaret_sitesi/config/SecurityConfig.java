@@ -50,8 +50,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/css/**", "/static/js/js/**", "/images/**").permitAll()
                         .requestMatchers("/urunler/liste").permitAll()
+                        .requestMatchers("/kayit").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
