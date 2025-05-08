@@ -1,0 +1,25 @@
+<!-- kategoriler.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Kategoriler</title>
+
+
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1>Kategoriler</h1>
+lorem ipsum dolor
+    <div class="kategoriler">
+        <div class="" th:each="kategori : ${kategoriler}">
+
+            <h3 th:text="${kategori.ad}">Kategori Adı</h3>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

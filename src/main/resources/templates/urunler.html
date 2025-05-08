@@ -1,0 +1,69 @@
+<!-- urunler.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+layout:decorate="~{layout}">
+<head>
+  <title>Ürünler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .urunler {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .urun-karti {
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .urun-karti img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .fiyat {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+  <h1>Ürünler</h1>
+  <div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+  </div>
+  <form class="arama-bar" method="get" action="/urunler/liste">
+    <input type="text" name="ad" placeholder="Ürün adı ile ara"/>
+    <button type="submit">Ara</button>
+  </form>
+  <div th:if="${#authentication != null}">
+    HELLO
+  </div>
+
+  <div class="urunler">
+    <div class="urun-karti" th:each="urun : ${urunler}">
+      <img th:src="${urun.resimUrl}" alt="Resim yok"/>
+      <h3 th:text="${urun.ad}">Ürün Adı</h3>
+      <p th:text="${urun.aciklama}">Açıklama</p>
+      <p class="fiyat" th:text="'₺' + ${urun.fiyat}">₺0</p>
+      <p><small th:text="${urun.kategori.ad}">Kategori</small></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

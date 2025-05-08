@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: content">
+<body>
+<h2>Favori Ürünleriniz</h2>
+<div th:each="urun : ${favoriUrunler}">
+    <p th:text="${urun.ad} + ' - ' + ${urun.fiyat} + '₺'">Favori Ürün</p>
+</div>
+</body>
+</html>

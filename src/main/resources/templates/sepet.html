@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: content">
+<body>
+<h2>Sepetiniz</h2>
+<div th:each="urun : ${sepetUrunleri}">
+    <p th:text="${urun.ad} + ' - ' + ${urun.fiyat} + '₺'">Ürün</p>
+</div>
+<p th:text="'Toplam: ' + ${toplamFiyat} + '₺'">Toplam</p>
+<a href="/siparis/ver">Siparişi Tamamla</a>
+</body>
+</html>

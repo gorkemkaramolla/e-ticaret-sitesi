@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} ?: 'E-Ticaret Sitesi'">E-Ticaret Sitesi</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* NAVBAR STİLİ */
+        header {
+            background-color: #2c3e50;
+            padding: 15px 30px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #34495e;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+            font-size: 14px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            padding: 20px 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="/" class="logo">E-Ticaret</a>
+        <div class="nav-links">
+            <a href="/urunler/liste">Ürünler</a>
+            <a href="/kategoriler/liste">Kategoriler</a>
+            <a href="/sepet">Sepet</a>
+            <a href="/favoriler">Favoriler</a>
+            <a href="/giris">Giriş</a>
+            <a href="/kayit">Kayıt Ol</a>
+        </div>
+    </nav>
+</header>
+
+<main layout:fragment="content">
+    <!-- Sayfa içeriği buraya gelecek -->
+</main>
+
+<footer>
+    <p>&copy; 2025 E-Ticaret</p>
+</footer>
+
+</body>
+</html>
