@@ -86,7 +86,7 @@
 <body>
 <div class="login-container">
     <h1>Kayıt Ol</h1>
-    <form th:action="@{/kullanicilar}" method="post" th:object="${kullanici}">
+    <form th:action="@{/kayit}" method="post" th:object="${kullanici}">
         <div class="form-group">
             <label for="kullaniciAdi">Kullanıcı Adı:</label>
             <input type="text" th:field="*{kullaniciAdi}" id="kullaniciAdi" required />
